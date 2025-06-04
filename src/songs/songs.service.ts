@@ -1,4 +1,4 @@
-import {Injectable} from '@nestjs/common';
+import {Injectable, Scope} from '@nestjs/common';
 
 interface Song {
     title: string;
@@ -20,6 +20,8 @@ export class SongsService {
     }
 
     findAll() {
+        //error comes while fetching the data from db
+        throw new Error("Error in DB while fetching songs");
         return this.songs;
     }
 
