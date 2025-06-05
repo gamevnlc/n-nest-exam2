@@ -1,6 +1,6 @@
 import {
     Body,
-    Controller,
+    Controller, DefaultValuePipe,
     Delete,
     Get,
     HttpException,
@@ -8,26 +8,34 @@ import {
     Param,
     ParseIntPipe,
     Post,
-    Put,
+    Put, Query,
     Scope
 } from '@nestjs/common';
 import {SongsService} from "./songs.service";
 import {CreateSongDto} from "./dto/create-song-dto";
+import {Song} from "./song.entity";
+import {DeleteResult, UpdateResult} from "typeorm";
+import {UpdateSongDto} from "./dto/update-song-dto";
+import {Pagination} from "nestjs-typeorm-paginate";
 
 @Controller('songs')
 export class SongsController {
     constructor(private readonly songsService: SongsService) {
 
     }
+
     @Get()
-    findAll() {
-        try {
-            return this.songsService.findAll();
-        } catch (error) {
-            throw new HttpException("server error", HttpStatus.BAD_REQUEST, {
-                cause: error
-            });
-        }
+    findAll(
+        @Query('page', new DefaultValuePipe(1), ParseIntPipe)
+        page = 1,
+        @Query('limit', new DefaultValuePipe(10), ParseIntPipe)
+        limit = 10,
+    ): Promise<Pagination<Song>> {
+        limit = limit > 100 ? 100 : limit;
+        return this.songsService.paginate({
+            page,
+            limit,
+        });
     }
 
     @Get(':id')
@@ -36,23 +44,26 @@ export class SongsController {
             'id',
             new ParseIntPipe({errorHttpStatusCode: HttpStatus.NOT_ACCEPTABLE})
         ) id: number,
-    ) {
-        return `Find One Song ID ${id} with ${typeof id}`;
+    ): Promise<Song | null> {
+        return this.songsService.findOne(id);
     }
 
     @Put(':id')
-    update() {
-        return "Update Song ID";
+    update(
+        @Param('id', ParseIntPipe) id: number,
+        @Body() updateSongDto: UpdateSongDto
+    ): Promise<UpdateResult> {
+        return this.songsService.update(id, updateSongDto);
     }
 
     @Delete(':id')
-    delete() {
-        return "Delete Song ID";
+    delete(@Param('id', ParseIntPipe) id: number): Promise<DeleteResult> {
+        return this.songsService.remove(id);
     }
 
     @Post()
-    create(@Body() createSongDto: CreateSongDto) {
-        return createSongDto;
+    create(@Body() createSongDto: CreateSongDto): Promise<Song> {
+        return this.songsService.create(createSongDto);
     }
 
 }

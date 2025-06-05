@@ -1,24 +1,50 @@
 
 ### SEND FETCH SONGS REQUEST
-GET http://localhost:3000/songs
+GET http://localhost:3000/songs/?page=1&limit=2
 
 ### Find SONGS REQUEST
-GET http://localhost:3000/songs/1
+GET http://localhost:3000/songs/2
 
 ### Create New SONGS REQUEST
 POST http://localhost:3000/songs
 Content-Type: application/json
 
 {
-    "title": "last",
-    "releasedDate": "2024-09-29",
-    "duration": "02:34",
-    "artists": ["single"]
+  "title": "last",
+  "releasedDate": "2024-09-29",
+  "duration": "02:34",
+  "artists": [
+    1, 2
+  ],
+  "lyrics": "hello"
 }
 
 
 ### Update SONGS REQUEST
-PUT http://localhost:3000/songs/1
+PUT http://localhost:3000/songs/2
+Content-Type: application/json
+
+{
+  "title": "last",
+  "releasedDate": "2024-09-29",
+  "duration": "02:34",
+  "artists": ["single"],
+  "lyrics": "hello"
+}
+
 
 ### Update SONGS REQUEST
 DELETE http://localhost:3000/songs/1
+
+### Create new PlayList
+
+POST http://localhost:3000/playlists
+Content-Type: application/json
+
+{
+  "name": "Feel Good Now",
+  "songs": [
+    6
+  ],
+  "user": 2
+}
