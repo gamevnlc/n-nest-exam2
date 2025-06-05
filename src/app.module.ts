@@ -9,8 +9,11 @@ import {DataSource} from "typeorm";
 import {Song} from "./songs/song.entity";
 import {Artist} from "./artist/artist.entity";
 import {User} from "./users/user.entity";
-import {Playlist} from "./songs/playlists/playlist.entity";
-import {PlayListModule} from "./songs/playlists/playlists.module";
+import {Playlist} from "./playlists/playlist.entity";
+import {PlayListModule} from "./playlists/playlists.module";
+import { AuthModule } from './auth/auth.module';
+import { UsersService } from './users/users.service';
+import { UsersModule } from './users/users.module';
 
 @Module({
     imports: [
@@ -25,7 +28,9 @@ import {PlayListModule} from "./songs/playlists/playlists.module";
             entities: [Song, Artist, User, Playlist]
         }),
         SongsModule,
-        PlayListModule
+        PlayListModule,
+        AuthModule,
+        UsersModule
     ],
     controllers: [AppController],
     providers: [AppService],
