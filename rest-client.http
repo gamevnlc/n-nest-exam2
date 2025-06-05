@@ -8,6 +8,7 @@ GET http://localhost:3000/songs/2
 ### Create New SONGS REQUEST
 POST http://localhost:3000/songs
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IngxQGdtYWlsLmNvbSIsInVzZXJJZCI6NiwiYXJ0aXN0SWQiOjEsImlhdCI6MTc0OTExNDczNCwiZXhwIjoxNzQ5MjAxMTM0fQ.XQKYpXQnm3LKzHReFb9tUjIhk5BE8b9uHu-yWbhRQYc
 
 {
   "title": "last",
@@ -56,9 +57,9 @@ POST http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-  "firstName": "john",
+  "firstName": "x1",
   "lastName": "doe",
-  "email": "john12@gmail.com",
+  "email": "x1@gmail.com",
   "password": "123456"
 }
 
@@ -68,11 +69,11 @@ POST http://localhost:3000/auth/login
 Content-Type: application/json
 
 {
-  "email": "john12@gmail.com",
+  "email": "x1@gmail.com",
   "password": "123456"
 }
 
 ### Profile
 
 GET http://localhost:3000/profile
-Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImpvaG4xMkBnbWFpbC5jb20iLCJzdWIiOjQsImlhdCI6MTc0OTExMTk4MCwiZXhwIjoxNzQ5MTk4MzgwfQ.oil09in3v0sQbCbrd4iWK8Z0pIPNZVToXOSQ6moh_4U
+Authorization: Bearer  eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6IngxQGdtYWlsLmNvbSIsInVzZXJJZCI6NiwiYXJ0aXN0SWQiOjEsImlhdCI6MTc0OTExNDczNCwiZXhwIjoxNzQ5MjAxMTM0fQ.XQKYpXQnm3LKzHReFb9tUjIhk5BE8b9uHu-yWbhRQYc

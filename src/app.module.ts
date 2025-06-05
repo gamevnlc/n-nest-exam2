@@ -7,7 +7,7 @@ import {SongsController} from "./songs/songs.controller";
 import {TypeOrmModule} from "@nestjs/typeorm"
 import {DataSource} from "typeorm";
 import {Song} from "./songs/song.entity";
-import {Artist} from "./artist/artist.entity";
+import {Artist} from "./artists/artist.entity";
 import {User} from "./users/user.entity";
 import {Playlist} from "./playlists/playlist.entity";
 import {PlayListModule} from "./playlists/playlists.module";
@@ -15,6 +15,7 @@ import { AuthModule } from './auth/auth.module';
 import { UsersService } from './users/users.service';
 import { UsersModule } from './users/users.module';
 import {JwtModule} from "@nestjs/jwt";
+import { ArtistsModule } from './artists/artists.module';
 
 @Module({
     imports: [
@@ -32,7 +33,7 @@ import {JwtModule} from "@nestjs/jwt";
         PlayListModule,
         AuthModule,
         UsersModule,
-        JwtModule.register({secret: 'HAD_12X#@'}),
+        ArtistsModule,
     ],
     controllers: [AppController],
     providers: [AppService],
